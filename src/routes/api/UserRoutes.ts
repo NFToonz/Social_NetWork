@@ -11,19 +11,19 @@ import {
     deleteUser } from '../../controllers/UsersCont.js';
 
 // Get all users
-Router.get('/', getUsers); // Get all users
+router.get('/', getUsers); // Get all users
 
 // Get a user by ID
-Router.get('/:id', getUsersById); // Get a user by ID
+router.get('/:id', getUsersById); // Get a user by ID
 
 // Create a new user
-Router.post('/', createUser); // Create a new user
+router.post('/', createUser); // Create a new user
 
 // Update a user by ID
-Router.put('/:id', updateUser); // Update a user by ID
+router.put('/:id', updateUser); // Update a user by ID
 
 // Delete a user by ID
-Router.delete('/:id', deleteUser); // Delete a user by ID
+router.delete('/:id', deleteUser); // Delete a user by ID
 
 // Export the router
 export default router;

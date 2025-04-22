@@ -1,82 +1,24 @@
-import express from 'express';
-// import mongoose from 'mongoose';
-// import dotenv from 'dotenv';
+import express from "express";
+import db from "./config/connections.js";
+// import routes from "./routes/index.js";
 
+const cwd = process.cwd();
+
+const PORT = 3001;
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-// Connection string to local instance of MongoDB
-const connectionStringURI = `mongodb://127.0.0.1:27017`;
-
-// Initialize a new instance of MongoClient
-const client = new MongoClient(connectionStringURI);
-
-// Create variable to hold our database name
-const dbName = 'UserDB';
-
-// Use connect method to connect to the mongo server
-await client.connect()
-.catch(err => {console.log(err)});
-
-const db = client.db(dbName);
-
-// Built in Express function that parses incoming requests to JSON
+// Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
+// These next two liners PARSE the incoming requests with urlencoded payloads and JSON payloads
+// and make them available under the req.body property
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Post request to create a single document to collection
-app.post('/Users', async (req, res) => {
-  try {
-    // collection() creates or selects instance of collection. Takes in collection name
-    // insertOne() inserts single document into collection. Takes in object.
-    const results = await db.collection('bookCollection').insertOne(
-      { title: req.body.title, author: req.body.author }
-    )
-    // Sends results
-    res.status(201).json(results);
-  }
-  catch (error) {
-    // Handles error
-    res.status(500).json({ error });
-  }
+app.use(routes);
+
+// we need to connect to our database before starting the Express server
+db.once("open", () => {
+  console.log(`Connected to database for ${cwd}`);
+  app.listen(PORT, () => {
+    console.log(`API server for ${cwd} running on port ${PORT}!`);
+  });
 });
-
-// Post request to add multiple sample documents to collection
-app.post('/books/seed', async (_req, res) => {
-  try {
-    const results = await db.collection('bookCollection').insertMany(
-      [
-        { "title": "Oh the Places We Will Go!" },
-        { "title": "Diary of Anne Frank" }
-      ]
-    )
-
-    // Sends results
-    res.status(201).json(results);
-  } catch (error) {
-    // Handles error
-    res.status(500).json({ error });
-  }
-});
-
-// Get request to read all the documents in a collection
-app.get('/books', async (_req, res) => {
-  try {
-    const results = await db.collection('bookCollection')
-      // find() returns all documents. Equivalent to `Select *` in SQL.
-      .find({})
-      // Returns all the documents in an array
-      .toArray()
-    // Sends results
-    res.status(200).json(results);
-  }
-  catch (error) {
-    // Handles error
-    res.status(500).json({ error });
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`);
-});
-
-
