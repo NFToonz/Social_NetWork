@@ -10,6 +10,7 @@ interface IUser extends Document {
     email: string;
     thoughts: Types.ObjectId[];
     friends: Types.ObjectId[];
+    reactions: Types.ObjectId[];
 }
 // Define the Thought interface
 // This interface is used to define the structure of a thought document
