@@ -26,3 +26,9 @@ const ThoughtSchema = new Schema<IThought>({
 ThoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
+
+// Ensure virtuals are included when converting to JSON
+ThoughtSchema.set('toJSON', { virtuals: true });
+ThoughtSchema.set('toObject', { virtuals: true });
+
+export const Thought = model<IThought>('Thought', ThoughtSchema);
