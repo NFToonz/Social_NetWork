@@ -1,12 +1,12 @@
 import express from "express";
 import db from "./config/connections.js";
-// import routes from "./routes/index.js";
+import routes from "./routes/index.js";
 
 const cwd = process.cwd();
 
 const PORT = 3001;
 const app = express();
-import routes from "./routes/api/UserRoutes.js"; // Import the routes from the userRoutes file
+// import routes from "./routes/api/UserRoutes.js";
 
 // Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
 // These next two liners PARSE the incoming requests with urlencoded payloads and JSON payloads

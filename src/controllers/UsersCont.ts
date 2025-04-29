@@ -19,7 +19,7 @@ export const getUsersById = async (req: Request, res: Response) => {
             .populate('thoughts') // Assuming 'thoughts' is a field in the User schema
             .populate('friends'); // Assuming 'friends' is a field in the User schema
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+             res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json(user);
     } catch (err) {
@@ -46,7 +46,7 @@ export const updateUser = async (req: Request, res: Response)=> {
             { new: true, runValidators: true }
         );
         if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
+             res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json(updatedUser);
     } catch (err) {
@@ -55,11 +55,11 @@ export const updateUser = async (req: Request, res: Response)=> {
     }
 }
 // Delete a user and remove them from the database
-export const deleteUser = async (req: Request, res: Response): Promise<Response | undefined> => {
+export const deleteUser = async (req: Request, res: Response) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
         if (!deletedUser) {
-            return res.status(404).json({ message: 'User not found' });
+            res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (err) {
