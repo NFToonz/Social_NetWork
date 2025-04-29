@@ -32,6 +32,7 @@ const UserSchema = new Schema<IUser>({
     thoughts: [{ type: Types.ObjectId, ref: 'Thought' }],
     friends: [{ type: Types.ObjectId, ref: 'User' }]
 });
+
 // Define the schema for the Thought model
 // The schema defines the structure of a thought document
 // It includes the following properties:
@@ -47,7 +48,7 @@ UserSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-// Add a virtual for reactionCount
+// Add a Thought virtual for reactionCount
 ThoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });

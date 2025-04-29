@@ -20,11 +20,11 @@ router.get('/:id', getUsersById); // Get a user by ID
 router.post('/', createUser); // Create a new user
 
 // Update a user by ID
-router.put('/:id', updateUser); // Update a user by ID
+router.route('/:id').put(updateUser); // Update a user by ID
 
 // Delete a user by ID
 router.delete('/:id', deleteUser); // Delete a user by ID
 
 // Export the router
-export default router;
+export {router as apiRoutes};
 // This code defines the routes for user-related operations in an Express application.

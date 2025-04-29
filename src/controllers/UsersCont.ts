@@ -13,7 +13,7 @@ export const getUsers = async (req: Request, res: Response) => {
     }
 }
 
-export const getUsersById = async (req: Request, res: Response): Promise<Response | undefined> => {
+export const getUsersById = async (req: Request, res: Response) => {
     try {
         const user = await User.findById(req.params.id)
             .populate('thoughts') // Assuming 'thoughts' is a field in the User schema
@@ -38,7 +38,7 @@ export const createUser = async (req: Request, res: Response) => {
     }
 }
 // Update a user by its _id
-export const updateUser = async (req: Request, res: Response): Promise<Response | undefined> => {
+export const updateUser = async (req: Request, res: Response)=> {
     try {
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id, 
