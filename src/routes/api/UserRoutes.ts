@@ -26,5 +26,5 @@ router.route('/:id').put(updateUser); // Update a user by ID
 router.delete('/:id', deleteUser); // Delete a user by ID
 
 // Export the router
-export {router as apiRoutes};
+export { router as userRoutes };
 // This code defines the routes for user-related operations in an Express application.

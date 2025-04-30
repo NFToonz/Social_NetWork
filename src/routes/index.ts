@@ -1,9 +1,9 @@
 import { Router } from 'express';
 const router = Router();
-import {apiRoutes} from './api/UserRoutes';
+import { userRoutes } from './api/UserRoutes';
 
 
-router.use('/api', apiRoutes);
+router.use('/api', userRoutes);
 
 // router.use((_req, res) => {
 //   return res.send('Wrong route!');
