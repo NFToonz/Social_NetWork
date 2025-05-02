@@ -5,9 +5,9 @@ import { userRoutes } from './api/UserRoutes';
 
 router.use('/api', userRoutes);
 
-// router.use((_req, res) => {
-//   return res.send('Wrong route!');
-// });
+router.use('/*', (_req, res) => {
+  res.status(404).send('Wrong route!');
+});
 
 export default router;
 // This code sets up the main routes for an Express application.
